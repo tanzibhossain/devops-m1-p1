@@ -8,11 +8,13 @@ This project demonstrates fundamental version control operations using Git and G
 - Creating and switching branches
 - Pushing changes to a remote repository
 - Creating and merging pull requests on GitHub
+- **Automating tasks with GitHub Actions**
 
 ## Topics Covered
 - Git basics: commit, branch, merge
 - Remote repositories with GitHub
 - Collaboration workflow using pull requests
+- **CI/CD basics using GitHub Actions**
 
 ---
 
@@ -47,23 +49,43 @@ This project demonstrates fundamental version control operations using Git and G
 
 ---
 
-## Submission Requirements
-- The GitHub repository must be **public**.
-- Include:
-  - Initial commit with `README.md`.
-  - A `dev` branch with changes and an open pull request.
-  - A merged pull request back into the `main` branch.
-- Use meaningful commit messages and branch names.
-- Provide descriptive pull request summaries explaining the purpose and changes.
+# Module 2 Project_2
 
----
+You have a `hello.txt` file in your existing Git repository from your previous assignment. Create a GitHub Actions workflow to read and output the content of this file to the workflow's log when code is pushed to the `main` branch.
 
+## Steps
 
-## Notes
-- Follow Git best practices for commit hygiene and branch management.
-- Ensure the repository structure is clear and organized.
-- Practice collaborative workflows using pull requests to merge code safely.
+1. **Verify Existing Repository**  
+   Ensure you have a GitHub repository with a `hello.txt` file in the `main` branch.
 
----
+2. **Create Workflow File**  
+   Create a GitHub Actions workflow file in the `.github/workflows` directory, setting the trigger for pushes to `main`.
 
-Thank you for reviewing this project!
+3. **Checkout Code**  
+   Add a step to checkout the repository's code.
+
+4. **Read and Output**  
+   Add a step to read the `hello.txt` file and print its content to the workflow's log.
+
+5. **Push and Observe**  
+   Push your workflow file and observe the workflow's execution in GitHub Actions.
+
+### Example Workflow File
+
+```yaml
+name: Read hello.txt
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  read-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Read hello.txt
+        run: cat hello.txt
